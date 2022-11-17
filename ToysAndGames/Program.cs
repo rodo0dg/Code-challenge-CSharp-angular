@@ -5,13 +5,14 @@ using Models.Entities;
 using Repository;
 using Repository.ProductRepo;
 using Services.ProductService;
+using ToysAndGames.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 
-//builder.Services.AddMvc();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(

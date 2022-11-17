@@ -1,4 +1,5 @@
-﻿using Models.DTOs;
+﻿using AutoMapper;
+using Models.DTOs;
 using Models.Entities;
 using Repository.ProductRepo;
 
@@ -7,22 +8,17 @@ namespace Services.ProductService
     public class ProductService : IProductService
     {
         IProductRepository _repository;
-        public ProductService(IProductRepository productRepository)
+        IMapper _mapper;
+
+        public ProductService(IProductRepository productRepository, IMapper mapper)
         {
             _repository = productRepository;
+            _mapper = mapper;
         }
 
         public List<ProductDTO> GetProducts()
         {
-            return _repository.GetProducts().Select(x => new ProductDTO()
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Description = x.Description,
-                AgeRestriction = x.AgeRestriction,
-                Company = x.Company,
-                Price = x.Price
-            }).ToList();
+            return _repository.GetProducts().Select(x => _mapper.Map<ProductDTO>(x)).ToList();
         }
 
         public ProductDTO CreateProduct(ProductDTOCreate product) 
