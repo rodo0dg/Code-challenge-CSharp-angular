@@ -26,7 +26,19 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin();
+                      });
+});
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -38,6 +50,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 //app.UseRouting();
+
+app.UseCors(MyAllowSpecificOrigins);
+
 
 app.UseAuthorization();
 
