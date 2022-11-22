@@ -22,4 +22,8 @@ export class ToysGamesDashboardComponent implements OnInit {
     .getProducts()
     .subscribe((data: Product[]) => this.products = data );
   }
+
+  handleView(event: Product) {
+    this.router.navigate(['/toys-and-games', event.id])
+  }
 }

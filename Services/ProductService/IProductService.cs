@@ -15,5 +15,6 @@ namespace Services.ProductService
         public ProductDTO CreateProduct(ProductDTOCreate product);
         public ProductDTO UpdateProduct(ProductDTOUpdate product);
         public void DeleteProduct(int id);
+        public ProductDTO GetProduct(int id);
     }
 }

@@ -55,5 +55,13 @@ namespace Services.ProductService
         {
             _repository.DeleteProduct(id);
         }
+
+        public ProductDTO GetProduct(int id)
+        {
+            Product product_entity = _repository.GetProduct(id);
+            ProductDTO product_dto = new ProductDTO();
+            product_dto = _mapper.Map<ProductDTO>(product_entity);
+            return product_dto;
+        }
     }
 }

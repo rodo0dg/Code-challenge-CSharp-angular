@@ -1,0 +1,41 @@
+<button (click)="goBack()">Return</button>
+<form>
+
+    <div>
+        Name
+    </div>
+    <input 
+        type="text"
+        value="{{product.name}}">
+    
+    <div>
+        Description
+    </div>
+    <input
+        type="text"
+        value="{{product.description}}">
+    
+    <div>
+        Age Restriction
+    </div>
+    <input
+        type="text"
+        value="{{product.ageRestriction}}">
+    
+    <div>
+        Company
+    </div>
+    <input
+        type="text"
+        value="{{product.company}}">
+    
+    <div>
+        Price
+    </div>
+    <input 
+        type="text"
+        value="{{product.price}}">
+    <button type="submit" class="btnSave">
+        Save
+    </button>
+</form>

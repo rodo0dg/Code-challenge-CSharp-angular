@@ -14,4 +14,8 @@ export class ToysAndGamesDashboardService {
         return this.http
         .get<Product[]>("https://localhost:7268/Product");
     }
+
+    getProduct(id: number) : Observable<Product> {
+        return this.http.get<Product>(`https://localhost:7268/product/GetProduct?id=${id}`);
+    }
 }

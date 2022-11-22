@@ -29,6 +29,20 @@ namespace ToysAndGames.Controllers
             }
         }
 
+        [HttpGet("GetProduct")]
+        public IActionResult GetProduct([FromQuery]int id)
+        {
+            try
+            {
+                ProductDTO result = _productService.GetProduct(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         public IActionResult Create([FromBody] ProductDTOCreate product) 
         {

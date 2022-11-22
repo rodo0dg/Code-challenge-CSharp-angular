@@ -1,5 +1,30 @@
-<app-product-detail
+
+<div class="row">
+    <div class="column1Header">
+    Id    
+    </div>
+    <div class="column2Header">
+    Name
+    </div>
+    <div class="column2Header">
+    Description
+    </div>
+    <div class="column1Header">
+    Age Restriction
+    </div>
+    <div class="column2Header">
+    Company
+    </div>
+    <div class="column1Header">
+    Price
+    </div>
+    <div class="column1Header">    
+    </div>
+</div>
+
+<app-product-detail class="row"
     *ngFor="let product of products;"
     [detail]="product"
-    class="card">
+    (view)="handleView($event)">
 </app-product-detail>
+

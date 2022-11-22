@@ -15,5 +15,6 @@ namespace Repository.ProductRepo
         public Product CreateProduct(ProductDTOCreate product);
         public Product UpdateProduct(ProductDTOUpdate product);
         public void DeleteProduct(int id);
+        public Product GetProduct(int id);
     }
 }

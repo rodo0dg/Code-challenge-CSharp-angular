@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../../models/product.interface';
 
 @Component({
@@ -10,8 +10,12 @@ export class ProductDetailComponent {
   
   @Input() detail!: Product;
 
-  constructor(){
-    
-  }
+  @Output()
+  view: EventEmitter<Product> = new EventEmitter<Product>();
 
+  constructor(){}
+
+  goToProduct() {
+    this.view.emit(this.detail);
+  }
 }

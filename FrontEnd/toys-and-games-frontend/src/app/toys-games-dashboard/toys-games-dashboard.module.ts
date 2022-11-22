@@ -11,12 +11,14 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 
 // services
 import { ToysAndGamesDashboardService } from './toys-games-dashboard-service';
+import { ProductDetailFormComponent } from './containers/product-detail-form/product-detail-form.component';
 
 const routes: Routes = [
   {
     path: 'toys-and-games',
     children: [
-      { path: '', component: ToysGamesDashboardComponent }
+      { path: '', component: ToysGamesDashboardComponent },
+      { path: ':id', component: ProductDetailFormComponent }
     ]
   }
 ]
@@ -24,7 +26,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ToysGamesDashboardComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    ProductDetailFormComponent
   ],
   imports: [
     CommonModule,

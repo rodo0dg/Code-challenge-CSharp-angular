@@ -1,6 +1,6 @@
 export interface Product {
     id: number,
-    name: string,
+    name?: string,
     description: string,
     ageRestriction: number,
     company: string,

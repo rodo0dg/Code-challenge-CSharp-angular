@@ -68,5 +68,10 @@ namespace Repository.ProductRepo
                 throw new Exception($"No product found with id {id}");
             }
         }
+
+        public Product? GetProduct(int id)
+        {
+            return _db.Products.FirstOrDefault(x => x.Id == id);
+        }
     }
 }

@@ -1,3 +1,23 @@
-<div class="card-container">    
-    <p>{{detail.name}}</p>
+<div class="column1">
+    {{detail.id}}
+</div>
+    <div class="column2">
+    {{detail.name}}
+</div>
+<div class="column2">
+    {{detail.description}}
+</div>
+<div class="column1">
+    {{detail.ageRestriction}}
+</div>
+<div class="column2">
+    {{detail.company}}
+</div>
+<div class="column1">
+    {{detail.price}}
+</div>
+<div class="column1">
+    <Button (click)="goToProduct()">
+        View
+    </Button>
 </div>
