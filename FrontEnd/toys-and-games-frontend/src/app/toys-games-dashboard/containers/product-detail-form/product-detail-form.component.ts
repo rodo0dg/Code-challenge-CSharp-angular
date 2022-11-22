@@ -14,7 +14,7 @@ import { ToysAndGamesDashboardService } from '../../toys-games-dashboard-service
 })
 export class ProductDetailFormComponent implements OnInit{
   
-  product: Product = {id:0, name:'', description:'', ageRestriction:0, company:'', price:0 };
+  product: Product = { id:0, name:'', description:'', ageRestriction:0, company:'', price:0 };
 
   constructor(
     private router: Router,
@@ -22,17 +22,9 @@ export class ProductDetailFormComponent implements OnInit{
     private productService: ToysAndGamesDashboardService) {}
 
   ngOnInit(): void {
-    
-    this.route.params
-    .pipe
-    .switchMap((data: Product) => this.productService.getProduct(data.id))
-    .subscribe((data: Product) => this.product = data);
-    
-    // this.productService
-    // .getProduct(1)
-    // .subscribe((data: Product) => this.product = data);
-    
-    // prms.subscribe((p)=>{console.log('p',p)});
+    this.route.params.subscribe((p) => { 
+      this.productService.getProduct(p['id']).subscribe((data:Product)=>{ this.product = data })
+    });
   }
 
   goBack() {
