@@ -36,9 +36,9 @@ namespace Services.ProductService
             return product_dto;
         }
 
-        public ProductDTO UpdateProduct(ProductDTOUpdate product)
+        public ProductDTO UpdateProduct(ProductDTOUpdate product, int id)
         {
-            Product product_entity = _repository.UpdateProduct(product);
+            Product product_entity = _repository.UpdateProduct(product, id);
             ProductDTO product_dto = new ProductDTO()
             {
                 Id = product_entity.Id,

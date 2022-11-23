@@ -1,4 +1,5 @@
-﻿using Models.DTOs;
+﻿using AutoMapper;
+using Models.DTOs;
 using Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,11 @@ namespace Repository.ProductRepo
     public class ProductRepository : IProductRepository
     {
         ApplicationDbContext _db;
-        public ProductRepository(ApplicationDbContext db)
+        IMapper _mapper;
+        public ProductRepository(ApplicationDbContext db, IMapper mapper)
         {
             _db = db;
+            _mapper = mapper;
         }
 
         public List<Product> GetProducts()
@@ -40,18 +43,17 @@ namespace Repository.ProductRepo
             return product_entity;
         }
 
-        public Product UpdateProduct(ProductDTOUpdate product)
+        public Product UpdateProduct(ProductDTOUpdate product, int id)
         {
-            Product product_entity = new Product()
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description,
-                Company = product.Company,
-                AgeRestriction = product.AgeRestriction,
-                Price = product.Price
-            };
-            _db.Products.Update(product_entity);
+            Product product_entity = _db.Products.Where(x => x.Id == id).FirstOrDefault();
+
+            product_entity.Name = product.Name;
+            product_entity.Description = product.Description;
+            product_entity.Price = product.Price;
+            product_entity.AgeRestriction = product.AgeRestriction;
+            product_entity.Company = product.Company;
+
+            _db.SaveChanges();
             return product_entity;
         }
 

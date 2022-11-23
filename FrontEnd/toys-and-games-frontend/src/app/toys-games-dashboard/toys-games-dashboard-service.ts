@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from 'rxjs/operators';
@@ -17,5 +17,19 @@ export class ToysAndGamesDashboardService {
 
     getProduct(id: number) : Observable<Product> {
         return this.http.get<Product>(`https://localhost:7268/product/GetProduct?id=${id}`);
+    }
+
+    updateProduct(product: Product, id: number): Observable<Product> { 
+        const options = {
+            headers: new HttpHeaders().append('Content-Type', 'application/json')
+        }
+        return this.http.put<Product>(`https://localhost:7268/product?id=${id}`,product, options)
+    }
+
+    createProduct(product: Product) : Observable<Product> {
+        const options = {
+            headers: new HttpHeaders().append('Content-Type', 'application/json')
+        }
+        return this.http.post<Product>(`https://localhost:7268/product`,product, options)
     }
 }

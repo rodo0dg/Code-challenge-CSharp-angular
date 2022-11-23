@@ -26,4 +26,8 @@ export class ToysGamesDashboardComponent implements OnInit {
   handleView(event: Product) {
     this.router.navigate(['/toys-and-games', event.id])
   }
+
+  createProduct(){
+    this.router.navigate(['/toys-and-games/add'])
+  }
 }

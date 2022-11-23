@@ -58,11 +58,11 @@ namespace ToysAndGames.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody] ProductDTOUpdate product) 
+        public IActionResult Update([FromQuery] int id,[FromBody] ProductDTOUpdate product) 
         {
             try
             {
-                ProductDTO result = _productService.UpdateProduct(product);
+                ProductDTO result = _productService.UpdateProduct(product, id);
                 return Ok(result);
             }
             catch (Exception ex)

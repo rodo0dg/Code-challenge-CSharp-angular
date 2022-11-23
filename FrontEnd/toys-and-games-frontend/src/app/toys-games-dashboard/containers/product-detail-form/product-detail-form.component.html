@@ -1,41 +1,57 @@
 <button (click)="goBack()">Return</button>
-<form>
+<form (ngSubmit)="handleSubmit(form.value, form.valid)" #form="ngForm" novalidate>
 
     <div>
         Name
     </div>
     <input 
         type="text"
-        value="{{product.name}}">
+        value="{{product.name}}"
+        [ngModel]="product.name"
+        name="name"
+    >
     
     <div>
         Description
     </div>
     <input
         type="text"
-        value="{{product.description}}">
+        value="{{product.description}}"
+        [ngModel]="product.description"
+        name="description"
+    >
     
     <div>
         Age Restriction
     </div>
     <input
         type="text"
-        value="{{product.ageRestriction}}">
+        value="{{product.ageRestriction}}"
+        [ngModel]="product.ageRestriction"
+        name="ageRestriction"
+    >
     
     <div>
         Company
     </div>
     <input
         type="text"
-        value="{{product.company}}">
+        value="{{product.company}}"
+        [ngModel]="product.company"
+        name="company"
+    >
     
     <div>
         Price
     </div>
     <input 
         type="text"
-        value="{{product.price}}">
-    <button type="submit" class="btnSave">
+        value="{{product.price}}"
+        [ngModel]="product.price"
+        name="price"
+    >
+
+    <button type="submit" class="btnSave" >
         Save
     </button>
 </form>

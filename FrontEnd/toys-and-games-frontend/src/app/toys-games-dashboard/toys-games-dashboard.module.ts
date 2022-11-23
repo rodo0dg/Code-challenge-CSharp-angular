@@ -12,13 +12,15 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 // services
 import { ToysAndGamesDashboardService } from './toys-games-dashboard-service';
 import { ProductDetailFormComponent } from './containers/product-detail-form/product-detail-form.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
     path: 'toys-and-games',
     children: [
       { path: '', component: ToysGamesDashboardComponent },
-      { path: ':id', component: ProductDetailFormComponent }
+      { path: ':id', component: ProductDetailFormComponent },
+      { path: 'add', component: ProductDetailFormComponent }
     ]
   }
 ]
@@ -30,6 +32,7 @@ const routes: Routes = [
     ProductDetailFormComponent
   ],
   imports: [
+    FormsModule,
     CommonModule,
     HttpClientModule,
     RouterModule.forChild(routes)

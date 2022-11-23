@@ -13,7 +13,7 @@ namespace Repository.ProductRepo
     {
         public List<Product> GetProducts();
         public Product CreateProduct(ProductDTOCreate product);
-        public Product UpdateProduct(ProductDTOUpdate product);
+        public Product UpdateProduct(ProductDTOUpdate product, int id);
         public void DeleteProduct(int id);
         public Product GetProduct(int id);
     }

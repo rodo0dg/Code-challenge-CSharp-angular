@@ -13,7 +13,7 @@ namespace Services.ProductService
         public List<ProductDTO> GetProducts();
 
         public ProductDTO CreateProduct(ProductDTOCreate product);
-        public ProductDTO UpdateProduct(ProductDTOUpdate product);
+        public ProductDTO UpdateProduct(ProductDTOUpdate product, int id);
         public void DeleteProduct(int id);
         public ProductDTO GetProduct(int id);
     }
