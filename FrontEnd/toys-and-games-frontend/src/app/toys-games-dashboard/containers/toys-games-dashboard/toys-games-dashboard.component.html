@@ -18,6 +18,8 @@
     <div class="column1Header">
     Price
     </div>
+    <div class="column1Header">
+    </div>
     <div class="column1Header">    
     </div>
 </div>
@@ -25,7 +27,8 @@
 <app-product-detail class="row"
     *ngFor="let product of products;"
     [detail]="product"
-    (view)="handleView($event)">
+    (view)="handleView($event)"
+    (delete)="handleDelete($event)">
 </app-product-detail>
 
 <button (click)="createProduct()">

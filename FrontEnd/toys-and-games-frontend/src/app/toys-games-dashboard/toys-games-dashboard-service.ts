@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from 'rxjs/operators';
@@ -31,5 +31,10 @@ export class ToysAndGamesDashboardService {
             headers: new HttpHeaders().append('Content-Type', 'application/json')
         }
         return this.http.post<Product>(`https://localhost:7268/product`,product, options)
+    }
+
+    deleteProduct(id: number): Observable<any> {
+        var result = this.http.delete(`https://localhost:7268/product?id=${id}`, { responseType: 'text' });
+        return result;
     }
 }

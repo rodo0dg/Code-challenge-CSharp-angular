@@ -46,11 +46,18 @@ export class ProductDetailFormComponent implements OnInit{
     if(isValid) {
       if(this.addingNew === false) {
         this.productService.updateProduct(product, this.id)
-        .subscribe((data: Product) => {this.product = Object.assign({}, this.product, product)});
+        .subscribe((data: Product) => {
+          this.product = Object.assign({}, this.product, product);
+          this.router.navigate(['/toys-and-games']);
+        }
+        );
       }
       else {
         this.productService.createProduct(product)
-        .subscribe((data: Product) => {this.product = Object.assign({}, this.product, product)});
+        .subscribe((data: Product) => {
+          this.product = Object.assign({}, this.product, product);
+          this.router.navigate(['/toys-and-games']);
+        });
       }
     }
   }

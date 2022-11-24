@@ -13,9 +13,16 @@ export class ProductDetailComponent {
   @Output()
   view: EventEmitter<Product> = new EventEmitter<Product>();
 
+  @Output()
+  delete: EventEmitter<Product> = new EventEmitter<Product>();
+
   constructor(){}
 
   goToProduct() {
     this.view.emit(this.detail);
+  }
+
+  deleteProduct() {
+    this.delete.emit(this.detail);
   }
 }
