@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 // containers
 import { ToysGamesDashboardComponent } from './containers/toys-games-dashboard/toys-games-dashboard.component';
@@ -39,6 +40,7 @@ const routes: Routes = [
     CommonModule,
     HttpClientModule,
     MatDialogModule,
+    MatButtonModule,
     RouterModule.forChild(routes)
   ],
   providers: [

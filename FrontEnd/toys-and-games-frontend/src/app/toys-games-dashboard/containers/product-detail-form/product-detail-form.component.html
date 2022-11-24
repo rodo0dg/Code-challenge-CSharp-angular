@@ -1,4 +1,4 @@
-<button (click)="goBack()">Return</button>
+<button mat-raised-button mat-button color="primary" (click)="goBack()">Return</button>
 <form (ngSubmit)="handleSubmit(form.value, form.valid)" #form="ngForm" novalidate>
 
     <div>
@@ -51,7 +51,7 @@
         name="price"
     >
 
-    <button type="submit" class="btnSave" >
+    <button mat-raised-button mat-button color="primary" type="submit" class="btnSave" >
         Save
     </button>
 </form>
