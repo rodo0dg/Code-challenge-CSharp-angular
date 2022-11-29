@@ -4,6 +4,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatCard, MatCardModule } from '@angular/material/card';
+import { BrowserAnimationsModule }from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // containers
 import { ToysGamesDashboardComponent } from './containers/toys-games-dashboard/toys-games-dashboard.component';
@@ -14,7 +18,6 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 // services
 import { ToysAndGamesDashboardService } from './toys-games-dashboard-service';
 import { ProductDetailFormComponent } from './containers/product-detail-form/product-detail-form.component';
-import { FormsModule } from '@angular/forms';
 import { ProductDeleteConfirmationComponent } from './components/product-delete-confirmation/product-delete-confirmation.component';
 
 const routes: Routes = [
@@ -41,6 +44,10 @@ const routes: Routes = [
     HttpClientModule,
     MatDialogModule,
     MatButtonModule,
+    MatInputModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
     RouterModule.forChild(routes)
   ],
   providers: [

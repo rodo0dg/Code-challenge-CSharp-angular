@@ -14,7 +14,9 @@ namespace Models.DTOs
         public string? Name { get; set; }
         public string? Description { get; set; }
         public int? AgeRestriction { get; set; }
+        [Required]
         public string? Company { get; set; }
+        [Required]
         public decimal Price { get; set; }
     }
 }

@@ -78,11 +78,11 @@ namespace ToysAndGames.Test
         {
             // Arrange
             ProductDTOUpdate product = new ProductDTOUpdate();
-            product.Name = "Auto lavado";
-            product.Description = "Pista HotWheels auto lavado";
-            product.Company = "Juguetelandia";
-            product.AgeRestriction = 8;
-            product.Price = 600;
+            product.name = "Auto lavado";
+            product.description = "Pista HotWheels auto lavado";
+            product.company = "Juguetelandia";
+            product.agerestriction = 8;
+            product.price = 600;
 
             ProductDTO productReturned = new ProductDTO();
             productReturned.Id = 1;
@@ -99,11 +99,11 @@ namespace ToysAndGames.Test
 
             // Assert
             Assert.Equal((int)HttpStatusCode.OK, result?.StatusCode);
-            Assert.Equal(product.Name, ((ProductDTO)result.Value).Name);
-            Assert.Equal(product.Description, ((ProductDTO)result.Value).Description);
-            Assert.Equal(product.Company, ((ProductDTO)result.Value).Company);
-            Assert.Equal(product.AgeRestriction, ((ProductDTO)result.Value).AgeRestriction);
-            Assert.Equal(product.Price, ((ProductDTO)result.Value).Price);
+            Assert.Equal(product.name, ((ProductDTO)result.Value).Name);
+            Assert.Equal(product.description, ((ProductDTO)result.Value).Description);
+            Assert.Equal(product.company, ((ProductDTO)result.Value).Company);
+            Assert.Equal(product.agerestriction, ((ProductDTO)result.Value).AgeRestriction);
+            Assert.Equal(product.price, ((ProductDTO)result.Value).Price);
         }
 
         [Fact]

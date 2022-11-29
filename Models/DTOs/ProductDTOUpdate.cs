@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
@@ -10,10 +11,14 @@ namespace Models.DTOs
 {
     public class ProductDTOUpdate
     {
-        public string? Name { get; set; }
-        public string? Description { get; set; }
-        public int? AgeRestriction { get; set; }
-        public string? Company { get; set; }
-        public decimal Price { get; set; }
+        [Required]
+        public string? name { get; set; }
+        public string? description { get; set; }
+        public int? agerestriction { get; set; }
+        [Required]
+        public string? company { get; set; }
+        [Required]
+        public decimal price { get; set; }
+        public IFormFile? image { get; set; }
     }
 }

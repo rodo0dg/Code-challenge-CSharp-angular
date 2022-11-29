@@ -1,57 +1,86 @@
 <button mat-raised-button mat-button color="primary" (click)="goBack()">Return</button>
-<form (ngSubmit)="handleSubmit(form.value, form.valid)" #form="ngForm" novalidate>
-
-    <div>
-        Name
+<!-- #form="ngForm" -->
+<form [formGroup]="productForm" (ngSubmit)="handleSubmit()">
+    <div class="formContainer">
+        <div class="formCol1">
+            <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input 
+                    matInput 
+                    type="text" 
+                    formControlName="name"
+                    placeholder="Name"
+                    name="name">
+                <mat-error >
+                    Name is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>Description</mat-label>
+                <input
+                    matInput 
+                    type="text"
+                    formControlName="description"
+                    placeholder="Write a description of the product"
+                    name="description">
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>Age restriction</mat-label>
+                <input
+                    matInput 
+                    type="text"
+                    formControlName="ageRestriction"
+                    name="ageRestriction">
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>Company</mat-label>
+                <input
+                    matInput
+                    type="text"
+                    formControlName="company"
+                    placeholder="Which company does this product belongs"
+                    name="company">
+                <mat-error>
+                    Company is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field>
+                <mat-label>Price</mat-label>
+                <input 
+                    matInput
+                    type="decimal"
+                    formControlName="price"
+                    name="price">
+                <mat-error >
+                    Price is <strong>required</strong>
+                </mat-error>
+                <mat-error>
+                    Price min value is 1
+                </mat-error>
+            </mat-form-field>
+            <button mat-raised-button mat-button color="primary" type="submit" class="btnSave" [disabled]="productForm.invalid"  > 
+                Save
+            </button>
+        </div>
+        <div class="formCol2">
+            <mat-card class="example-card">
+                <img mat-card-image src="{{[productForm.controls['productImg'].value]}}" class="imgProduct">
+                <input 
+                    type="file" 
+                    mat-raised-button 
+                    mat-button 
+                    color="accent" 
+                    class="btnUploadImage" 
+                    mat-button 
+                    (change)="onFileSelected($event)" 
+                    #fileUpload
+                    accept="image/jpg, image/png" />
+            </mat-card>
+        </div>
     </div>
-    <input 
-        type="text"
-        value="{{product.name}}"
-        [ngModel]="product.name"
-        name="name"
-    >
-    
-    <div>
-        Description
-    </div>
-    <input
-        type="text"
-        value="{{product.description}}"
-        [ngModel]="product.description"
-        name="description"
-    >
-    
-    <div>
-        Age Restriction
-    </div>
-    <input
-        type="text"
-        value="{{product.ageRestriction}}"
-        [ngModel]="product.ageRestriction"
-        name="ageRestriction"
-    >
-    
-    <div>
-        Company
-    </div>
-    <input
-        type="text"
-        value="{{product.company}}"
-        [ngModel]="product.company"
-        name="company"
-    >
-    
-    <div>
-        Price
-    </div>
-    <input 
-        type="text"
-        value="{{product.price}}"
-        [ngModel]="product.price"
-        name="price"
-    >
-
-    <button mat-raised-button mat-button color="primary" type="submit" class="btnSave" >
-        Save
-    </button>
+    <!-- [disabled]="!form.dirty || form?.invalid" -->
 </form>

@@ -47,11 +47,11 @@ namespace Repository.ProductRepo
         {
             Product product_entity = _db.Products.Where(x => x.Id == id).FirstOrDefault();
 
-            product_entity.Name = product.Name;
-            product_entity.Description = product.Description;
-            product_entity.Price = product.Price;
-            product_entity.AgeRestriction = product.AgeRestriction;
-            product_entity.Company = product.Company;
+            product_entity.Name = product.name;
+            product_entity.Description = product.description;
+            product_entity.Price = product.price;
+            product_entity.AgeRestriction = product.agerestriction;
+            product_entity.Company = product.company;
 
             _db.SaveChanges();
             return product_entity;

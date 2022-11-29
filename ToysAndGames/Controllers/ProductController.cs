@@ -58,11 +58,12 @@ namespace ToysAndGames.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update([FromQuery] int id,[FromBody] ProductDTOUpdate product) 
+        [RequestSizeLimit(5 * 1024 * 1024)]
+        public IActionResult Update([FromQuery] int id, [FromForm] ProductDTOUpdate productDTO)
         {
             try
             {
-                ProductDTO result = _productService.UpdateProduct(product, id);
+                ProductDTO result = _productService.UpdateProduct(productDTO, id);
                 return Ok(result);
             }
             catch (Exception ex)
