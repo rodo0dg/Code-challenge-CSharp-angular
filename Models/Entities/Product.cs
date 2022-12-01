@@ -30,5 +30,7 @@ namespace Models.Entities
         [NotNull]
         [Range(1,1000)]
         public decimal Price { get; set; }
+        public string? imagePath { get; set; }
+        public string? imageMimeType { get; set; }
     }
 }

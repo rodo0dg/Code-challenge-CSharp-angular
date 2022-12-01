@@ -33,8 +33,12 @@ export class ProductDetailFormComponent implements OnInit{
       if(p['id'] !== 'add') {
         this.addingNew = false;
         this.productService.getProduct(p['id']).subscribe((data:Product)=>{ 
-          this.productForm.patchValue(data)
-          this.id = p['id']
+          this.productForm.patchValue(data);
+          this.id = p['id'];
+          if (data['hasPicture']) {
+            let imagePath = `https://localhost:7268/Product/DonwloadImage?id=${this.id}`;
+            this.productForm.patchValue({'productImg': imagePath});
+          }
         });
       }
       else {

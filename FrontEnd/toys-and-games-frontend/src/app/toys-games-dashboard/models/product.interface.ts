@@ -5,5 +5,6 @@ export interface Product {
     ageRestriction: number,
     company: string,
     price: number,
-    image: File
+    image: File,
+    hasPicture: boolean,
 }

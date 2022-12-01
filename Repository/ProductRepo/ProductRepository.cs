@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Models.DTOs;
 using Models.Entities;
 using System;
@@ -52,6 +53,8 @@ namespace Repository.ProductRepo
             product_entity.Price = product.price;
             product_entity.AgeRestriction = product.agerestriction;
             product_entity.Company = product.company;
+            product_entity.imagePath = product.imagePath;
+            product_entity.imageMimeType = product.imageMimeType;
 
             _db.SaveChanges();
             return product_entity;
@@ -74,6 +77,51 @@ namespace Repository.ProductRepo
         public Product? GetProduct(int id)
         {
             return _db.Products.FirstOrDefault(x => x.Id == id);
+        }
+
+        public (string? path, string? mime) SavePicture(IFormFile file, int id)
+        {
+            string imgsDirectory = $"{Directory.GetCurrentDirectory()}\\images\\{id}";
+            string fileName = id.ToString();
+
+            string extension = "";
+
+            if (file.ContentType == @"image/jpeg")
+                extension = ".jpg";
+            else if (file.ContentType == @"image/png")
+                extension = ".png";
+
+            string filePath = $"{imgsDirectory}\\{fileName}{extension}";
+
+            if(Directory.Exists(imgsDirectory))
+                Directory.Delete(imgsDirectory, true);
+
+            Directory.CreateDirectory(imgsDirectory);
+
+            if (!Directory.Exists(imgsDirectory))
+                return (null,null);
+
+            using(Stream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            {
+                file.CopyTo(fileStream);
+            }
+            return (filePath, file.ContentType);
+        }
+
+        public (byte[] file, string fileName, string mimeType) GetPicture(int id)
+        {
+            var product = _db.Products.Find(id);
+            string filePath = product.imagePath;
+            string fileName = filePath.Split("\\")[^1];
+
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
+                using (var ms = new MemoryStream())
+                {
+                    fs.CopyTo(ms);
+                    return (file: ms.ToArray(), fileName: fileName, mimeType: product.imageMimeType);
+                }
+            }
         }
     }
 }

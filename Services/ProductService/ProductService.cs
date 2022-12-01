@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Models.DTOs;
 using Models.Entities;
 using Repository.ProductRepo;
@@ -23,7 +24,16 @@ namespace Services.ProductService
 
         public ProductDTO CreateProduct(ProductDTOCreate product) 
         {
-            Product product_entity = _repository.CreateProduct(product);
+            Product product_saved = _repository.CreateProduct(product);
+
+            var path_mime = _repository.SavePicture(product.image, product_saved.Id);
+
+            ProductDTOUpdate product_updt_dto = _mapper.Map<ProductDTOUpdate>(product_saved);
+            product_updt_dto.imagePath = path_mime.path;
+            product_updt_dto.imageMimeType = path_mime.mime;
+            
+            Product product_entity = _repository.UpdateProduct(product_updt_dto, product_saved.Id);
+            
             ProductDTO product_dto = new ProductDTO()
             {
                 Id = product_entity.Id,
@@ -39,6 +49,14 @@ namespace Services.ProductService
         public ProductDTO UpdateProduct(ProductDTOUpdate product, int id)
         {
             Product product_entity = _repository.UpdateProduct(product, id);
+
+            (string path, string mime) = _repository.SavePicture(product.image, product_entity.Id);
+            ProductDTOUpdate dtoUpdate = _mapper.Map<ProductDTOUpdate>(product_entity);
+            dtoUpdate.imagePath = path;
+            dtoUpdate.imageMimeType = mime;
+
+            product_entity = _repository.UpdateProduct(dtoUpdate, id);
+
             ProductDTO product_dto = new ProductDTO()
             {
                 Id = product_entity.Id,
@@ -61,7 +79,13 @@ namespace Services.ProductService
             Product product_entity = _repository.GetProduct(id);
             ProductDTO product_dto = new ProductDTO();
             product_dto = _mapper.Map<ProductDTO>(product_entity);
+            product_dto.HasPicture = !string.IsNullOrEmpty(product_entity.imagePath);
             return product_dto;
+        }
+
+        public (byte[] file, string fileName, string mimeType) GetPicture(int id)
+        {
+            return _repository.GetPicture(id);
         }
     }
 }

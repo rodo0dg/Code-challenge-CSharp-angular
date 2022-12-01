@@ -11,6 +11,7 @@ namespace ToysAndGames.AutoMapper
             CreateMap<Product, ProductDTO>();
             CreateMap<ProductDTOCreate, Product>();
             CreateMap<ProductDTOUpdate, Product>();
+            CreateMap<Product, ProductDTOUpdate>();
         }
     }
 }

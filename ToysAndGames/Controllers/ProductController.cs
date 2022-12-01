@@ -44,7 +44,8 @@ namespace ToysAndGames.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] ProductDTOCreate product) 
+        [RequestSizeLimit(5 * 1024 * 1024)]
+        public IActionResult Create([FromForm] ProductDTOCreate product) 
         {
             try
             {
@@ -84,6 +85,13 @@ namespace ToysAndGames.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpGet("DonwloadImage")]
+        public IActionResult DownloadImage([FromQuery] int id) 
+        {
+            var file = _productService.GetPicture(id);
+            return File(file.file.ToArray(), file.mimeType, file.fileName);
         }
     }
 }

@@ -16,5 +16,8 @@ namespace Models.DTOs
         public int? AgeRestriction { get; set; }
         public string? Company { get; set; }
         public decimal Price { get; set; }
+        public bool HasPicture { get; set; }
+        public string? imagePath { get; set; }
+        public string? imageMimeType { get; set; }
     }
 }

@@ -92,10 +92,10 @@ namespace ToysAndGames.Test
             productReturned.AgeRestriction = 8;
             productReturned.Price = 600;
 
-            _productService.Setup(x => x.UpdateProduct(product)).Returns(productReturned);
+            _productService.Setup(x => x.UpdateProduct(product, 1)).Returns(productReturned);
 
             // Action
-            ObjectResult? result = _productController.Update(product) as ObjectResult;
+            ObjectResult? result = _productController.Update(1, product) as ObjectResult;
 
             // Assert
             Assert.Equal((int)HttpStatusCode.OK, result?.StatusCode);

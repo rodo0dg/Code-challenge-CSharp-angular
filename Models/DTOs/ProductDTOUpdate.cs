@@ -20,5 +20,7 @@ namespace Models.DTOs
         [Required]
         public decimal price { get; set; }
         public IFormFile? image { get; set; }
+        public string? imagePath { get; set; }
+        public string? imageMimeType { get; set; }
     }
 }

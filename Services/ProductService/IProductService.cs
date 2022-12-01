@@ -16,5 +16,6 @@ namespace Services.ProductService
         public ProductDTO UpdateProduct(ProductDTOUpdate product, int id);
         public void DeleteProduct(int id);
         public ProductDTO GetProduct(int id);
+        public (byte[] file, string fileName, string mimeType) GetPicture(int id);
     }
 }
