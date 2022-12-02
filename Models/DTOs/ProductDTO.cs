@@ -10,13 +10,13 @@ namespace Models.DTOs
 {
     public class ProductDTO
     {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public string? Description { get; set; }
-        public int? AgeRestriction { get; set; }
-        public string? Company { get; set; }
-        public decimal Price { get; set; }
-        public bool HasPicture { get; set; }
+        public int id { get; set; }
+        public string? name { get; set; }
+        public string? description { get; set; }
+        public int? ageRestriction { get; set; }
+        public string? company { get; set; }
+        public decimal price { get; set; }
+        public bool hasPicture { get; set; }
         public string? imagePath { get; set; }
         public string? imageMimeType { get; set; }
     }

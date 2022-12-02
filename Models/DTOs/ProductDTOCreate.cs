@@ -12,13 +12,13 @@ namespace Models.DTOs
     public class ProductDTOCreate
     {
         [Required]
-        public string? Name { get; set; }
-        public string? Description { get; set; }
-        public int? AgeRestriction { get; set; }
+        public string? name { get; set; }
+        public string? description { get; set; }
+        public int? ageRestriction { get; set; }
         [Required]
-        public string? Company { get; set; }
+        public string? company { get; set; }
         [Required]
-        public decimal Price { get; set; }
+        public decimal price { get; set; }
         public IFormFile? image { get; set; }
     }
 }

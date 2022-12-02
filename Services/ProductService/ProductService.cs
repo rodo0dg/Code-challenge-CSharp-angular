@@ -25,10 +25,15 @@ namespace Services.ProductService
         public ProductDTO CreateProduct(ProductDTOCreate product) 
         {
             Product product_saved = _repository.CreateProduct(product);
+            (string? path, string? mime) path_mime = (null, null);
 
-            var path_mime = _repository.SavePicture(product.image, product_saved.Id);
-
+            if (product.image != null)
+            {
+                path_mime = _repository.SavePicture(product.image, product_saved.Id);
+            }
+            
             ProductDTOUpdate product_updt_dto = _mapper.Map<ProductDTOUpdate>(product_saved);
+
             product_updt_dto.imagePath = path_mime.path;
             product_updt_dto.imageMimeType = path_mime.mime;
             
@@ -36,12 +41,12 @@ namespace Services.ProductService
             
             ProductDTO product_dto = new ProductDTO()
             {
-                Id = product_entity.Id,
-                Name = product_entity.Name,
-                Description = product_entity.Description,
-                AgeRestriction = product_entity.AgeRestriction,
-                Company = product_entity.Company,
-                Price = product_entity.Price
+                id = product_entity.Id,
+                name = product_entity.Name,
+                description = product_entity.Description,
+                ageRestriction = product_entity.AgeRestriction,
+                company = product_entity.Company,
+                price = product_entity.Price
             };
             return product_dto;
         }
@@ -59,12 +64,12 @@ namespace Services.ProductService
 
             ProductDTO product_dto = new ProductDTO()
             {
-                Id = product_entity.Id,
-                Name = product_entity.Name,
-                Description = product_entity.Description,
-                AgeRestriction = product_entity.AgeRestriction,
-                Company = product_entity.Company,
-                Price = product_entity.Price
+                id = product_entity.Id,
+                name = product_entity.Name,
+                description = product_entity.Description,
+                ageRestriction = product_entity.AgeRestriction,
+                company = product_entity.Company,
+                price = product_entity.Price
             };
             return product_dto;
         }
@@ -79,7 +84,7 @@ namespace Services.ProductService
             Product product_entity = _repository.GetProduct(id);
             ProductDTO product_dto = new ProductDTO();
             product_dto = _mapper.Map<ProductDTO>(product_entity);
-            product_dto.HasPicture = !string.IsNullOrEmpty(product_entity.imagePath);
+            product_dto.hasPicture = !string.IsNullOrEmpty(product_entity.imagePath);
             return product_dto;
         }
 

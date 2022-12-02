@@ -31,11 +31,11 @@ namespace Repository.ProductRepo
         {
             Product product_entity = new Product()
             {
-                Name = product.Name,
-                Description = product.Description,
-                Company = product.Company,
-                AgeRestriction = product.AgeRestriction,
-                Price = product.Price
+                Name = product.name,
+                Description = product.description,
+                Company = product.company,
+                AgeRestriction = product.ageRestriction,
+                Price = product.price
             };
 
             _db.Products.Add(product_entity);

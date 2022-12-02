@@ -26,8 +26,8 @@ namespace ToysAndGames.Test
             // Arrange
             List<ProductDTO> products = new List<ProductDTO>()
             {
-                new ProductDTO(){ Id = 1, Name = "Puzzle sky at night", Description = "Puzzle 500 pz van gogh", Company = "Jugetelandia", AgeRestriction = 12, Price = 357 },
-                new ProductDTO(){ Id = 2, Name = "Catan", Description = "Boardgame Catan", Company = "RavenFolk", AgeRestriction = 12, Price = 600 }
+                new ProductDTO(){ id = 1, name = "Puzzle sky at night", description = "Puzzle 500 pz van gogh", company = "Jugetelandia", ageRestriction = 12, price = 357 },
+                new ProductDTO(){ id = 2, name = "Catan", description = "Boardgame Catan", company = "RavenFolk", ageRestriction = 12, price = 600 }
             };
             
             _productService.Setup(x=>x.GetProducts()).Returns(products);
@@ -45,19 +45,19 @@ namespace ToysAndGames.Test
         {
             // Arrange
             ProductDTOCreate product = new ProductDTOCreate();
-            product.Name = "Auto lavado";
-            product.Description = "Pista HotWheels auto lavado";
-            product.Company = "Juguetelandia";
-            product.AgeRestriction = 8;
-            product.Price = 600;
+            product.name = "Auto lavado";
+            product.description = "Pista HotWheels auto lavado";
+            product.company = "Juguetelandia";
+            product.ageRestriction = 8;
+            product.price = 600;
 
             ProductDTO productReturned = new ProductDTO();
-            productReturned.Id = 1;
-            productReturned.Name = product.Name;
-            productReturned.Description = product.Description;
-            productReturned.Company = product.Company;
-            productReturned.AgeRestriction = product.AgeRestriction;
-            productReturned.Price = product.Price;
+            productReturned.id = 1;
+            productReturned.name = product.name;
+            productReturned.description = product.description;
+            productReturned.company = product.company;
+            productReturned.ageRestriction = product.ageRestriction;
+            productReturned.price = product.price;
 
             _productService.Setup(x => x.CreateProduct(product)).Returns(productReturned);
             
@@ -66,11 +66,11 @@ namespace ToysAndGames.Test
 
             // Assert 
             Assert.Equal((int)HttpStatusCode.OK, result?.StatusCode);
-            Assert.Equal(((ProductDTO)result.Value).Name, product.Name);
-            Assert.Equal(((ProductDTO)result.Value).Description, product.Description);
-            Assert.Equal(((ProductDTO)result.Value).Company, product.Company);
-            Assert.Equal(((ProductDTO)result.Value).AgeRestriction, product.AgeRestriction);
-            Assert.Equal(((ProductDTO)result.Value).Price, product.Price);
+            Assert.Equal(((ProductDTO)result.Value).name, product.name);
+            Assert.Equal(((ProductDTO)result.Value).description, product.description);
+            Assert.Equal(((ProductDTO)result.Value).company, product.company);
+            Assert.Equal(((ProductDTO)result.Value).ageRestriction, product.ageRestriction);
+            Assert.Equal(((ProductDTO)result.Value).price, product.price);
         }
 
         [Fact]
@@ -85,12 +85,12 @@ namespace ToysAndGames.Test
             product.price = 600;
 
             ProductDTO productReturned = new ProductDTO();
-            productReturned.Id = 1;
-            productReturned.Name = "Auto lavado";
-            productReturned.Description = "Pista HotWheels auto lavado";
-            productReturned.Company = "Juguetelandia";
-            productReturned.AgeRestriction = 8;
-            productReturned.Price = 600;
+            productReturned.id = 1;
+            productReturned.name = "Auto lavado";
+            productReturned.description = "Pista HotWheels auto lavado";
+            productReturned.company = "Juguetelandia";
+            productReturned.ageRestriction = 8;
+            productReturned.price = 600;
 
             _productService.Setup(x => x.UpdateProduct(product, 1)).Returns(productReturned);
 
@@ -99,11 +99,11 @@ namespace ToysAndGames.Test
 
             // Assert
             Assert.Equal((int)HttpStatusCode.OK, result?.StatusCode);
-            Assert.Equal(product.name, ((ProductDTO)result.Value).Name);
-            Assert.Equal(product.description, ((ProductDTO)result.Value).Description);
-            Assert.Equal(product.company, ((ProductDTO)result.Value).Company);
-            Assert.Equal(product.agerestriction, ((ProductDTO)result.Value).AgeRestriction);
-            Assert.Equal(product.price, ((ProductDTO)result.Value).Price);
+            Assert.Equal(product.name, ((ProductDTO)result.Value).name);
+            Assert.Equal(product.description, ((ProductDTO)result.Value).description);
+            Assert.Equal(product.company, ((ProductDTO)result.Value).company);
+            Assert.Equal(product.agerestriction, ((ProductDTO)result.Value).ageRestriction);
+            Assert.Equal(product.price, ((ProductDTO)result.Value).price);
         }
 
         [Fact]
