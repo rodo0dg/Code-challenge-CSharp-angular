@@ -1,4 +1,7 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ToysAndGamesDashboardService } from '../../toys-games-dashboard-service';
 
 import { ToysGamesDashboardComponent } from './toys-games-dashboard.component';
 
@@ -8,7 +11,17 @@ describe('ToysGamesDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ToysGamesDashboardComponent ]
+      declarations: [ 
+        ToysGamesDashboardComponent,
+      ],
+      imports:[
+        HttpClientModule,
+        MatDialogModule
+      ],
+      providers: [
+        ToysAndGamesDashboardService,
+        HttpClient
+      ]
     })
     .compileComponents();
 

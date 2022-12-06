@@ -14,6 +14,16 @@ describe('ProductDetailComponent', () => {
 
     fixture = TestBed.createComponent(ProductDetailComponent);
     component = fixture.componentInstance;
+    component.detail = {
+      id: 1,
+      name: "Banjo and Kazoe",
+      description: "Videogame for N64",
+      company: "GameStop",
+      ageRestriction: 8,
+      price: 500,
+      hasPicture: false,
+      image: File.prototype
+    };
     fixture.detectChanges();
   });
 
