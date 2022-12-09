@@ -19,7 +19,7 @@ export class ToysAndGamesDashboardService {
     }
 
     getProduct(id: number) : Observable<Product> {
-        return this.http.get<Product>(`${PRODUCTS_API}getProduct?id=${id}`);
+        return this.http.get<Product>(`${PRODUCTS_API}product/getProduct?id=${id}`);
     }
 
     createProduct(product: any) : Observable<Product> {

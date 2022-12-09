@@ -36,17 +36,8 @@ namespace Services.ProductService
             product_updt_dto.imageMimeType = path_mime.mime;
             
             Product product_entity = _repository.UpdateProduct(product_updt_dto, product_saved.Id);
-            
-            ProductDTO product_dto = new ProductDTO()
-            {
-                id = product_entity.Id,
-                name = product_entity.Name,
-                description = product_entity.Description,
-                ageRestriction = product_entity.AgeRestriction,
-                company = product_entity.Company,
-                price = product_entity.Price
-            };
-            return product_dto;
+
+            return _mapper.Map<ProductDTO>(product_entity);
         }
 
         public ProductDTO UpdateProduct(ProductDTOUpdate product, int id)
@@ -62,16 +53,9 @@ namespace Services.ProductService
             dtoUpdate.imageMimeType = path_mime.mime;
 
             product_entity = _repository.UpdateProduct(dtoUpdate, id);
-
-            ProductDTO product_dto = new ProductDTO()
-            {
-                id = product_entity.Id,
-                name = product_entity.Name,
-                description = product_entity.Description,
-                ageRestriction = product_entity.AgeRestriction,
-                company = product_entity.Company,
-                price = product_entity.Price
-            };
+            
+            ProductDTO product_dto = _mapper.Map<ProductDTO>(product_entity);
+            product_dto.hasPicture = !string.IsNullOrEmpty(product_dto.imagePath);
             return product_dto;
         }
 
@@ -82,10 +66,9 @@ namespace Services.ProductService
 
         public ProductDTO GetProduct(int id)
         {
-            Product product_entity = _repository.GetProduct(id);
-            ProductDTO product_dto = new ProductDTO();
-            product_dto = _mapper.Map<ProductDTO>(product_entity);
-            product_dto.hasPicture = !string.IsNullOrEmpty(product_entity.imagePath);
+            Product? product_entity = _repository.GetProduct(id);
+            ProductDTO product_dto = _mapper.Map<ProductDTO>(product_entity);
+            product_dto.hasPicture = !string.IsNullOrEmpty(product_entity?.imagePath);
             return product_dto;
         }
 

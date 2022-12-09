@@ -62,7 +62,7 @@
                     Price min value is 1
                 </mat-error>
             </mat-form-field>
-            <button mat-raised-button mat-button color="primary" type="submit" class="btnSave" [disabled]="productForm.invalid"  > 
+            <button id="btnSave" mat-raised-button mat-button color="primary" type="submit" class="btnSave" [disabled]="productForm.invalid"  > 
                 Save
             </button>
         </div>
@@ -82,5 +82,4 @@
             </mat-card>
         </div>
     </div>
-    <!-- [disabled]="!form.dirty || form?.invalid" -->
 </form>

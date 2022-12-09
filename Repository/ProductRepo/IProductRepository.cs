@@ -16,8 +16,8 @@ namespace Repository.ProductRepo
         public Product CreateProduct(ProductDTOCreate product);
         public Product UpdateProduct(ProductDTOUpdate product, int id);
         public void DeleteProduct(int id);
-        public Product GetProduct(int id);
-        public (string path, string mime) SavePicture(IFormFile? image, int id);
+        public Product? GetProduct(int id);
+        public (string? path, string? mime) SavePicture(IFormFile? image, int id);
         public (byte[] file, string fileName, string mimeType) GetPicture(int id);
     }
 }

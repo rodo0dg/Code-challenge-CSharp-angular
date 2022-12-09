@@ -29,14 +29,7 @@ namespace Repository.ProductRepo
 
         public Product CreateProduct(ProductDTOCreate product)
         {
-            Product product_entity = new Product()
-            {
-                Name = product.name,
-                Description = product.description,
-                Company = product.company,
-                AgeRestriction = product.ageRestriction,
-                Price = product.price
-            };
+            Product product_entity = _mapper.Map<Product>(product);
 
             _db.Products.Add(product_entity);
             _db.SaveChanges();
@@ -46,16 +39,9 @@ namespace Repository.ProductRepo
 
         public Product UpdateProduct(ProductDTOUpdate product, int id)
         {
-            Product product_entity = _db.Products.Where(x => x.Id == id).FirstOrDefault();
-
-            product_entity.Name = product.name;
-            product_entity.Description = product.description;
-            product_entity.Price = product.price;
-            product_entity.AgeRestriction = product.agerestriction;
-            product_entity.Company = product.company;
-            product_entity.imagePath = product.imagePath;
-            product_entity.imageMimeType = product.imageMimeType;
-
+            Product product_entity = _db.Products.Where(x => x.Id == id).First();
+            _mapper.Map<ProductDTOUpdate, Product>(product,product_entity);
+            
             _db.SaveChanges();
             return product_entity;
         }
@@ -79,16 +65,16 @@ namespace Repository.ProductRepo
             return _db.Products.FirstOrDefault(x => x.Id == id);
         }
 
-        public (string? path, string? mime) SavePicture(IFormFile file, int id)
+        public (string? path, string? mime) SavePicture(IFormFile? file, int id)
         {
             string imgsDirectory = $"{Directory.GetCurrentDirectory()}\\images\\{id}";
             string fileName = id.ToString();
 
             string extension = "";
 
-            if (file.ContentType == @"image/jpeg")
+            if (file?.ContentType == @"image/jpeg")
                 extension = ".jpg";
-            else if (file.ContentType == @"image/png")
+            else if (file?.ContentType == @"image/png")
                 extension = ".png";
 
             string filePath = $"{imgsDirectory}\\{fileName}{extension}";
@@ -111,7 +97,7 @@ namespace Repository.ProductRepo
         public (byte[] file, string fileName, string mimeType) GetPicture(int id)
         {
             var product = _db.Products.Find(id);
-            string filePath = product.imagePath;
+            string filePath = product?.imagePath ?? "";
             string fileName = filePath.Split("\\")[^1];
 
             using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
@@ -119,7 +105,7 @@ namespace Repository.ProductRepo
                 using (var ms = new MemoryStream())
                 {
                     fs.CopyTo(ms);
-                    return (file: ms.ToArray(), fileName: fileName, mimeType: product.imageMimeType);
+                    return (file: ms.ToArray(), fileName: fileName, mimeType: product?.imageMimeType ?? "");
                 }
             }
         }
