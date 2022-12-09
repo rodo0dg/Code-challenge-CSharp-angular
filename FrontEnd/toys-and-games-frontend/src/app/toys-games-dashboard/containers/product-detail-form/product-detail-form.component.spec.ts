@@ -51,3 +51,43 @@ describe('ProductDetailFormComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+describe('ProductDetailFormComponent', () => {
+
+  let component: ProductDetailFormComponent;
+  let fixture: ComponentFixture<ProductDetailFormComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ ProductDetailFormComponent ],
+      imports: [
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatInputModule,
+        MatCardModule,
+        BrowserAnimationsModule,
+      ],
+      providers: [
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            params: from([{id: 'add'}]),
+          },
+        },
+        ToysAndGamesDashboardService,
+      ],
+    })
+    .compileComponents();
+    
+    fixture = TestBed.createComponent(ProductDetailFormComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create on new mode', () => {
+    expect(component).toBeTruthy();
+  });
+});

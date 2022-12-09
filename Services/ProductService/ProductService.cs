@@ -27,10 +27,8 @@ namespace Services.ProductService
             Product product_saved = _repository.CreateProduct(product);
             (string? path, string? mime) path_mime = (null, null);
 
-            if (product.image != null)
-            {
-                path_mime = _repository.SavePicture(product.image, product_saved.Id);
-            }
+            if (product.image != null)            
+                path_mime = _repository.SavePicture(product.image, product_saved.Id);            
             
             ProductDTOUpdate product_updt_dto = _mapper.Map<ProductDTOUpdate>(product_saved);
 
@@ -54,11 +52,14 @@ namespace Services.ProductService
         public ProductDTO UpdateProduct(ProductDTOUpdate product, int id)
         {
             Product product_entity = _repository.UpdateProduct(product, id);
+            (string? path, string? mime) path_mime = (null, null);
 
-            (string path, string mime) = _repository.SavePicture(product.image, product_entity.Id);
+            if(product.image != null)
+                path_mime = _repository.SavePicture(product.image, product_entity.Id);
+
             ProductDTOUpdate dtoUpdate = _mapper.Map<ProductDTOUpdate>(product_entity);
-            dtoUpdate.imagePath = path;
-            dtoUpdate.imageMimeType = mime;
+            dtoUpdate.imagePath = path_mime.path;
+            dtoUpdate.imageMimeType = path_mime.mime;
 
             product_entity = _repository.UpdateProduct(dtoUpdate, id);
 

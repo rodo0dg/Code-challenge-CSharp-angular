@@ -30,4 +30,18 @@ describe('ProductDetailComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('view calls goToProduct', () => {
+    spyOn(component, 'goToProduct').and.callThrough();
+    const button = fixture.debugElement.nativeElement.querySelector('#viewBtn');
+    button.click();
+    expect(component.goToProduct).toHaveBeenCalled();
+  });
+
+  it('delete calls deleteProduct', () => {
+    spyOn(component, 'deleteProduct').and.callThrough();
+    const button = fixture.debugElement.nativeElement.querySelector('#deleteBtn');
+    button.click();
+    expect(component.deleteProduct).toHaveBeenCalled();
+  });
 });

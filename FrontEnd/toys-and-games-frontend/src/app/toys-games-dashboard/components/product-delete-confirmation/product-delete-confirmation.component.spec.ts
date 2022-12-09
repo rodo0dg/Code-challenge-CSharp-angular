@@ -15,6 +15,10 @@ describe('ProductDeleteConfirmationComponent', () => {
   let component: ProductDeleteConfirmationComponent;
   let fixture: ComponentFixture<ProductDeleteConfirmationComponent>;
 
+  const dialogMock = {
+    close: () => { }
+   };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ProductDeleteConfirmationComponent ],
@@ -25,12 +29,12 @@ describe('ProductDeleteConfirmationComponent', () => {
         ToysAndGamesDashboardService, 
         {
           provide: MatDialogRef,
-          useValue: {}
+          useValue: dialogMock
         },
       ]
     })
     .compileComponents();
-
+    TestBed.inject(MatDialogRef<ProductDeleteConfirmationComponent>);
     fixture = TestBed.createComponent(ProductDeleteConfirmationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -38,5 +42,19 @@ describe('ProductDeleteConfirmationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('Yes calls confirm', () => {
+    spyOn(component, 'confirm').and.callThrough();
+    const button = fixture.debugElement.nativeElement.querySelector('#yes');
+    button.click();
+    expect(component.confirm).toHaveBeenCalled(); 
+  });
+
+  it('No calls closeDialog', () => {
+    spyOn(component, 'closeDialog').and.callThrough();
+    const button = fixture.debugElement.nativeElement.querySelector('#no');
+    button.click();
+    expect(component.closeDialog).toHaveBeenCalled(); 
   });
 });

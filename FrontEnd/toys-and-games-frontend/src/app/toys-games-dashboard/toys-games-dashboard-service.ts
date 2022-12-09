@@ -6,18 +6,20 @@ import { map } from 'rxjs/operators';
 import { Product } from "./models/product.interface";
 
 const PASSENGER_API: string = ''
+const PRODUCTS_API: string = 'https://localhost:7268/';
 
 @Injectable()
 export class ToysAndGamesDashboardService {
+
     constructor(private http: HttpClient) {}
 
     getProducts() : Observable<Product[]> {
         return this.http
-        .get<Product[]>("https://localhost:7268/Product");
+        .get<Product[]>(`${PRODUCTS_API}product`);
     }
 
     getProduct(id: number) : Observable<Product> {
-        return this.http.get<Product>(`https://localhost:7268/product/GetProduct?id=${id}`);
+        return this.http.get<Product>(`${PRODUCTS_API}getProduct?id=${id}`);
     }
 
     createProduct(product: any) : Observable<Product> {
@@ -30,7 +32,7 @@ export class ToysAndGamesDashboardService {
         formData.append('price', product.price);
         formData.append('image', product.productImgFile);
 
-        return this.http.post<Product>(`https://localhost:7268/product`,formData, {})
+        return this.http.post<Product>(`${PRODUCTS_API}product`,formData, {})
     }
 
     updateProduct(id: number, product: any) : Observable<Product> {
@@ -42,11 +44,11 @@ export class ToysAndGamesDashboardService {
         formData.append('price', product.price);
         formData.append('image', product.productImgFile);
         
-        return this.http.put<Product>(`https://localhost:7268/Product?id=${id}`, formData, {});
+        return this.http.put<Product>(`${PRODUCTS_API}product?id=${id}`, formData, {});
     }
 
     deleteProduct(id: number): Observable<any> {
-        var result = this.http.delete(`https://localhost:7268/product?id=${id}`, { responseType: 'text' });
+        var result = this.http.delete(`${PRODUCTS_API}product?id=${id}`, { responseType: 'text' });
         return result;
     }
 }
