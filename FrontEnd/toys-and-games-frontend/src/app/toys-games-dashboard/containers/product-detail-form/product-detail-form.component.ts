@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { FormsModule, FormGroupDirective, FormControl, Validators, NgForm, FormGroup, FormBuilder } from '@angular/forms';
@@ -19,6 +19,7 @@ export class ProductDetailFormComponent implements OnInit{
   id: number = 0;
   addingNew: boolean = false;
   productForm!: FormGroup;
+  shouldBeDisabled: boolean = true;
 
   constructor(
     private router: Router,
@@ -29,6 +30,7 @@ export class ProductDetailFormComponent implements OnInit{
 
   ngOnInit(): void {
     this.productForm = this.initForm();
+    this.onChanges();
     this.route.params.subscribe((p) => { 
       if(p['id'] !== 'add') {
         this.addingNew = false;
@@ -44,6 +46,12 @@ export class ProductDetailFormComponent implements OnInit{
       else {
         this.addingNew = true;
       }
+    });
+  }
+
+  onChanges(): void {
+    this.productForm.valueChanges.subscribe( form => {
+      this.shouldBeDisabled = this.productForm.invalid;
     });
   }
 
@@ -72,6 +80,7 @@ export class ProductDetailFormComponent implements OnInit{
   }
 
   handleSubmit() {
+    this.shouldBeDisabled = true;
     if(this.addingNew === false) {
       this.productService.updateProduct(this.id, this.productForm.value)
       .subscribe((data: Product) => {
@@ -85,6 +94,7 @@ export class ProductDetailFormComponent implements OnInit{
         this.router.navigate(['/toys-and-games']);
       });
     }
+    this.shouldBeDisabled = false;
   }
 
   goBack() {
