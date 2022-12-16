@@ -1,0 +1,18 @@
+<div>
+    <form (ngSubmit)="onSubmit(form.value)" #form="ngForm" >
+        <ng-content select="h3"></ng-content>
+        <mat-form-field>
+            <mat-label id="lab">Email</mat-label>
+            <input matInput type="email" name="email">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput type="password" name="password">
+        </mat-form-field>
+        <ng-content select="auth-remember"></ng-content>
+        <auth-message #AuthMsg
+            [style.display]="(showMessage) ? 'inherit' : 'none'">
+        </auth-message>
+        <ng-content select="button"></ng-content>
+    </form>
+</div>

@@ -1,0 +1,11 @@
+<app-auth-form>
+    <h3>Create account</h3>
+    <button mat-raised-button mat-button type="submit">Create account</button>
+</app-auth-form>
+<app-auth-form>
+    <h3>Login</h3>
+    <auth-remember 
+        (checked)="rememberUser($event)">
+    </auth-remember>
+    <button mat-raised-button mat-button type="submit">Login</button>
+</app-auth-form>
